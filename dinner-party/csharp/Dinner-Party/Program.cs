@@ -1,7 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 List<Guest> Guests = GetGuests();
+
+List<Table> Tables = new List<Table> {
+    new Table {
+        name = "Table 1",
+        guests = new List<Guest>{}
+    },
+    new Table {
+        name = "Table 2",
+        guests = new List<Guest>{}
+    }
+};
+
+foreach (Guest thisGuest in Guests){
+    if (Tables[0].guests.Find(Guest => Guest.occupation == thisGuest.occupation)!= null ){
+        Tables[1].guests.Add(thisGuest);
+    }
+    else {
+        Tables[0].guests.Add(thisGuest);
+    }
+};
+
+foreach (Table table in Tables){
+    Console.WriteLine(table.name);
+    foreach (Guest guest in table.guests){
+        Console.WriteLine($"{guest.name} {guest.occupation} {guest.bio}");
+    }
+}
 
 List<Guest> GetGuests()
 {
@@ -28,9 +56,9 @@ List<Guest> GetGuests()
             bio = "(1913 - 2005)  American civil rights activist"
         },
         new Guest {
-                name = "Peter Sellers",
-                occupation = "entertainer",
-                bio = "(1925 - 1980) British actor and comedian"
+            name = "Peter Sellers",
+            occupation = "entertainer",
+            bio = "(1925 - 1980) British actor and comedian"
         },
         new Guest {
             name = "Alan Turing",
@@ -50,11 +78,15 @@ List<Guest> GetGuests()
     };
     return guests;
 }
-
+public class Table
+{
+    public string name { get; set; }
+    public List<Guest> guests { get; set; }
+}
 public class Guest
 {
-    public string name { get; set; };
-    public string occupation { get; set; };
+    public string name { get; set; }
+    public string occupation { get; set; }
     public string bio { get; set; }
 
 }
