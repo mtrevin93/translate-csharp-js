@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-
-// string s1 = Regex.Replace(``, "[^A-Za-z ]", "");
+using System.Collections.Generic;
+using System.Linq;
 
 string quote = @"
     Look again at that dot. That's here. That's home. That's us. On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives. The aggregate of our joy and suffering, thousands of confident religions, ideologies, and economic doctrines, every hunter and forager, every hero and coward, every creator and destroyer of civilization, every king and peasant, every young couple in love, every mother and father, hopeful child, inventor and explorer, every teacher of morals, every corrupt politician, every superstar, every supreme leader, every saint and sinner in the history of our species lived there--on a mote of dust suspended in a sunbeam.
@@ -13,4 +13,12 @@ string quote = @"
 
 quote = Regex.Replace(quote, "[^A-Za-z ]", "");
 
-Console.WriteLine(quote);
+string[] words = quote.Split(" ",StringSplitOptions.RemoveEmptyEntries);
+
+foreach(string word in words){
+    Console.WriteLine(word);
+}
+
+
+
+
