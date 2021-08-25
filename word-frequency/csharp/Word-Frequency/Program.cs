@@ -15,10 +15,19 @@ quote = Regex.Replace(quote, "[^A-Za-z ]", "");
 
 string[] words = quote.Split(" ",StringSplitOptions.RemoveEmptyEntries);
 
+Dictionary<string, int> wordFrequency = new Dictionary<string, int>();
+
 foreach(string word in words){
-    Console.WriteLine(word);
+    if (!wordFrequency.ContainsKey(word)){
+        wordFrequency.Add(word, 1);
+    }
+    else{
+        wordFrequency[word]++;
+    }
 }
 
-
+foreach(KeyValuePair<string, int> kvp in wordFrequency){
+    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, kvp.Value));
+}
 
 
